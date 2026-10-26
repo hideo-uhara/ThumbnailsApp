@@ -1,0 +1,76 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "DS5-0o-f4i.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Folder:\"; ObjectID = \"DS5-0o-f4i\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Folder:"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フォルダ:"
+          }
+        }
+      }
+    },
+    "Ev4-UX-3ai.title" : {
+      "comment" : "Class = \"UIViewController\"; title = \"ThumbnailsApp\"; ObjectID = \"Ev4-UX-3ai\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "ThumbnailsApp"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "FTZ-Uj-mjQ.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"ThumbnailsApp\"; ObjectID = \"FTZ-Uj-mjQ\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "ThumbnailsApp"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "jui-8V-h2q.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"IMG_0016.MOV\"; ObjectID = \"jui-8V-h2q\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IMG_0016.MOV"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "ZEW-Hu-1uL.normalTitle" : {
+      "comment" : "Class = \"UIButton\"; normalTitle = \"Button\"; ObjectID = \"ZEW-Hu-1uL\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Button"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    }
+  },
+  "version" : "1.1"
+}
