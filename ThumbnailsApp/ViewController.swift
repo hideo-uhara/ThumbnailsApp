@@ -5,7 +5,7 @@
 import UniformTypeIdentifiers
 import UIKit
 
-class FileItem: NSObject {
+class FileItem {
 	let url: URL
 	var thumbnail: UIImage! = nil
 	
@@ -125,7 +125,7 @@ extension ViewController: UITableViewDataSource {
 				fileItem.thumbnail = await self.thumbnailGenerator.thumbnail(url: fileItem.url, scale: scale) ?? UIImage(systemName: "xmark.circle")
 				
 				// imageは非同期で作成されるので、作成された時点でcellのfileItemが同じかチェック
-				if tableViewcell.fileItem == fileItem {
+				if tableViewcell.fileItem === fileItem {
 					imageView.image = fileItem.thumbnail
 					activityIndicatorView.stopAnimating()
 				} else {
