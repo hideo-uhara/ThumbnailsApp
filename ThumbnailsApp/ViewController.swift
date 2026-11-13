@@ -119,7 +119,7 @@ extension ViewController: UITableViewDataSource {
 			activityIndicatorView.startAnimating()
 			
 			tableViewcell.thumbnailTask?.cancel()
-			tableViewcell.thumbnailTask  = Task {
+			tableViewcell.thumbnailTask  = Task(priority: .utility) {
 				do {
 					let scale: CGFloat = self.view?.window?.windowScene?.screen.scale ?? UIScreen.main.scale
 					
