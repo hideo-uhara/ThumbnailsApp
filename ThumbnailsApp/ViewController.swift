@@ -120,16 +120,20 @@ extension ViewController: UITableViewDataSource {
 			
 			tableViewcell.thumbnailTask?.cancel()
 			tableViewcell.thumbnailTask  = Task {
-				let scale: CGFloat = self.view?.window?.windowScene?.screen.scale ?? UIScreen.main.scale
-				
-				fileItem.thumbnail = await self.thumbnailGenerator.thumbnail(url: fileItem.url, scale: scale) ?? UIImage(systemName: "xmark.circle")
-				
-				// imageは非同期で作成されるので、作成された時点でcellのfileItemが同じかチェック
-				if tableViewcell.fileItem === fileItem {
-					imageView.image = fileItem.thumbnail
-					activityIndicatorView.stopAnimating()
-				} else {
-					// 違う場合は、cellは再利用されている(prepareForReuseが呼ばれている)
+				do {
+					let scale: CGFloat = self.view?.window?.windowScene?.screen.scale ?? UIScreen.main.scale
+					
+					fileItem.thumbnail = try await self.thumbnailGenerator.thumbnail(url: fileItem.url, scale: scale) ?? UIImage(systemName: "xmark.circle")
+					
+					// imageは非同期で作成されるので、作成された時点でcellのfileItemが同じかチェック
+					if tableViewcell.fileItem === fileItem {
+						imageView.image = fileItem.thumbnail
+						activityIndicatorView.stopAnimating()
+					} else {
+						// 違う場合は、cellは再利用されている(prepareForReuseが呼ばれている)
+					}
+				} catch {
+					print(error.localizedDescription + " \(fileItem.url.lastPathComponent)")
 				}
 			}
 		}
