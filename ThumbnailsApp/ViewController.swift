@@ -16,14 +16,16 @@ class FileItem {
 
 class TableViewCell: UITableViewCell {
 	var fileItem: FileItem! = nil
-	var thumbnailTask: Task<Void, Never>? = nil
+	var thumbnailTask: Task<Void, Never>! = nil
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
 		
 		self.fileItem = nil
-		self.thumbnailTask?.cancel() // 以前のタスクはキャンセル
-		self.thumbnailTask = nil
+		if self.thumbnailTask != nil {
+			self.thumbnailTask.cancel() // 以前のタスクはキャンセル
+			self.thumbnailTask = nil
+		}
 		
 		let activityIndicatorView: UIActivityIndicatorView = self.viewWithTag(1) as! UIActivityIndicatorView
 		let imageView: UIImageView = self.viewWithTag(2) as! UIImageView
@@ -118,8 +120,11 @@ extension ViewController: UITableViewDataSource {
 		if fileItem.thumbnail == nil {
 			activityIndicatorView.startAnimating()
 			
-			tableViewcell.thumbnailTask?.cancel()
 			tableViewcell.thumbnailTask  = Task(priority: .utility) {
+				defer {
+					tableViewcell.thumbnailTask = nil
+				}
+				
 				do {
 					let scale: CGFloat = self.view?.window?.windowScene?.screen.scale ?? UIScreen.main.scale
 					
