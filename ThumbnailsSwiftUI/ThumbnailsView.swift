@@ -13,7 +13,7 @@ var borderWith: CGFloat = 0.0
 
 struct GlassEffectWhenPossible: ViewModifier {
 	func body(content: Content) -> some View {
-		if #available(iOS 24, *) {
+		if #available(iOS 26, *) {
 			content
 				.buttonStyle(.glass)
 				.buttonBorderShape(.circle)
