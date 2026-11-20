@@ -2,6 +2,7 @@
 // Thumbnails.swift
 //
 
+import UniformTypeIdentifiers
 import SwiftUI
 
 #if DEBUG
@@ -57,13 +58,12 @@ struct ThumbnailsContentView: View {
 	@Environment(\.displayScale) var displayScale
 	@State private var selectedId: UUID?
 	@State private var folderUrl: URL! = nil
-	@State private var shouldPresentSheet: Bool = false
+	@State private var isPresented: Bool = false
 	@State private var fileItems: [FileItem] = [
 		//FileItem(url: URL(fileURLWithPath: "a.txt")),
 		//FileItem(url: URL(fileURLWithPath: "b.txt")),
 
 	]
-
 	
 	var body: some View {
 		VStack {
@@ -81,7 +81,7 @@ struct ThumbnailsContentView: View {
 				Spacer()
 				
 				Button(action: {
-					self.shouldPresentSheet.toggle()
+					self.isPresented.toggle()
 				}) {
 					Image(systemName: "folder")
 						.font(.system(size: 22))
@@ -90,8 +90,9 @@ struct ThumbnailsContentView: View {
 				//.padding(10.0)
 				.glassEffectWhenPossible()
 				.controlSize(.regular)
-				.sheet(isPresented: $shouldPresentSheet) {
-					FolderPickerViewController(didPick: { urls in
+				.fileImporter(isPresented: self.$isPresented, allowedContentTypes: [.folder], allowsMultipleSelection: false) { result in
+					switch result {
+					case .success(let urls):
 						if let url: URL = urls.first {
 							self.folderUrl = url
 							
@@ -103,9 +104,10 @@ struct ThumbnailsContentView: View {
 									self.fileItems.append(FileItem(url: url))
 								}
 							}
-							
 						}
-					})
+					case .failure(let error):
+						print(error.localizedDescription)
+					}
 				}
 			}
 			.border(Color.gray, width: borderWith)

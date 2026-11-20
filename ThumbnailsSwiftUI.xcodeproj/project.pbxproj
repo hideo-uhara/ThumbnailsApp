@@ -16,7 +16,6 @@
 		7C6909FF30ACD4600076814C /* ThumbnailsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6909FB30ACD4600076814C /* ThumbnailsSwiftUIApp.swift */; };
 		7C690A0230ACD64D0076814C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C690A0130ACD64D0076814C /* SwiftUI.framework */; };
 		7C690A0430AD0B1F0076814C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C690A0330AD0B1F0076814C /* Extensions.swift */; };
-		7C8C6DBA30AD93260066FA8A /* FolderPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8C6DB930AD93260066FA8A /* FolderPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +29,6 @@
 		7C6909FB30ACD4600076814C /* ThumbnailsSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailsSwiftUIApp.swift; sourceTree = "<group>"; };
 		7C690A0130ACD64D0076814C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		7C690A0330AD0B1F0076814C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		7C8C6DB930AD93260066FA8A /* FolderPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +68,6 @@
 			children = (
 				7C690A0330AD0B1F0076814C /* Extensions.swift */,
 				7C13932830AD603C00FA100D /* ThumbnailGenerator.swift */,
-				7C8C6DB930AD93260066FA8A /* FolderPickerViewController.swift */,
 				7C6909FB30ACD4600076814C /* ThumbnailsSwiftUIApp.swift */,
 				7C6909FA30ACD4600076814C /* ThumbnailsView.swift */,
 				7C6909F930ACD4600076814C /* Assets.xcassets */,
@@ -161,7 +158,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C8C6DBA30AD93260066FA8A /* FolderPickerViewController.swift in Sources */,
 				7C6909FE30ACD4600076814C /* ThumbnailsView.swift in Sources */,
 				7C690A0430AD0B1F0076814C /* Extensions.swift in Sources */,
 				7C13932930AD603C00FA100D /* ThumbnailGenerator.swift in Sources */,
