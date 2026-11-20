@@ -10,12 +10,13 @@
 		7C13932930AD603C00FA100D /* ThumbnailGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C13932830AD603C00FA100D /* ThumbnailGenerator.swift */; };
 		7C13932B30AD73D000FA100D /* QuickLookThumbnailing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C13932A30AD73D000FA100D /* QuickLookThumbnailing.framework */; };
 		7C13932D30AD7F9500FA100D /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C13932C30AD7F9500FA100D /* UniformTypeIdentifiers.framework */; };
-		7C13932F30AD7F9D00FA100D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C13932E30AD7F9D00FA100D /* UIKit.framework */; };
+		7C13932F30AD7F9D00FA100D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C13932E30AD7F9D00FA100D /* UIKit.framework */; platformFilter = ios; };
 		7C6909FD30ACD4600076814C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C6909F930ACD4600076814C /* Assets.xcassets */; };
 		7C6909FE30ACD4600076814C /* ThumbnailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6909FA30ACD4600076814C /* ThumbnailsView.swift */; };
 		7C6909FF30ACD4600076814C /* ThumbnailsSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6909FB30ACD4600076814C /* ThumbnailsSwiftUIApp.swift */; };
 		7C690A0230ACD64D0076814C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C690A0130ACD64D0076814C /* SwiftUI.framework */; };
 		7C690A0430AD0B1F0076814C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C690A0330AD0B1F0076814C /* Extensions.swift */; };
+		7CAAC2EF30B0368500301AD9 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CAAC2EE30B0368500301AD9 /* AppKit.framework */; platformFilters = (macos, ); };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		7C6909FB30ACD4600076814C /* ThumbnailsSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailsSwiftUIApp.swift; sourceTree = "<group>"; };
 		7C690A0130ACD64D0076814C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		7C690A0330AD0B1F0076814C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7CAAC2EE30B0368500301AD9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CAAC2EF30B0368500301AD9 /* AppKit.framework in Frameworks */,
 				7C13932F30AD7F9D00FA100D /* UIKit.framework in Frameworks */,
 				7C13932D30AD7F9500FA100D /* UniformTypeIdentifiers.framework in Frameworks */,
 				7C13932B30AD73D000FA100D /* QuickLookThumbnailing.framework in Frameworks */,
@@ -78,6 +81,7 @@
 		7C690A0030ACD64D0076814C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7CAAC2EE30B0368500301AD9 /* AppKit.framework */,
 				7C13932E30AD7F9D00FA100D /* UIKit.framework */,
 				7C13932C30AD7F9500FA100D /* UniformTypeIdentifiers.framework */,
 				7C13932A30AD73D000FA100D /* QuickLookThumbnailing.framework */,
@@ -294,10 +298,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 47788WWNZA;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -309,10 +327,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mac.uhara.ThumbnailsSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = NO;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -327,10 +350,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 47788WWNZA;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -342,10 +379,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mac.uhara.ThumbnailsSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = NO;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;

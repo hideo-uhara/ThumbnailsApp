@@ -14,7 +14,7 @@ var borderWith: CGFloat = 0.0
 
 struct GlassEffectWhenPossible: ViewModifier {
 	func body(content: Content) -> some View {
-		if #available(iOS 26, *) {
+		if #available(iOS 26, macOS 26, *) {
 			content
 				.buttonStyle(.glass)
 				.buttonBorderShape(.circle)
@@ -33,7 +33,7 @@ extension View {
 @Observable class FileItem: Identifiable {
 	let id: UUID = UUID()
 	let url: URL
-	var thumbnail: UIImage! = nil
+	var thumbnail: Image! = nil
 	
 	init(url: URL) {
 		self.url = url
@@ -46,7 +46,9 @@ struct ThumbnailsView: View {
 			ThumbnailsContentView()
 				.border(Color.gray, width: borderWith)
 				.navigationTitle(Text("Thumbnails"))
+				#if os(iOS)
 				.navigationBarTitleDisplayMode(.inline)
+				#endif
 				.safeAreaPadding(.vertical)
 		}
 	}
@@ -54,6 +56,11 @@ struct ThumbnailsView: View {
 
 struct ThumbnailsContentView: View {
 	let thumbnailGenerator: ThumbnailGenerator = ThumbnailGenerator()
+	#if os(iOS)
+	let allowedContentTypes: [UTType] = [.folder]
+	#elseif os(macOS)
+	let allowedContentTypes: [UTType] = [.directory]
+	#endif
 	
 	@Environment(\.displayScale) var displayScale
 	@State private var selectedId: UUID?
@@ -64,6 +71,16 @@ struct ThumbnailsContentView: View {
 		//FileItem(url: URL(fileURLWithPath: "b.txt")),
 
 	]
+	@State var isStartAccessingSecurityScopedResource: Bool = false
+	@State var url: URL! = nil {
+		didSet {
+			if self.isStartAccessingSecurityScopedResource {
+				oldValue.stopAccessingSecurityScopedResource()
+			}
+			
+			self.isStartAccessingSecurityScopedResource = url.startAccessingSecurityScopedResource()
+		}
+	}
 	
 	var body: some View {
 		VStack {
@@ -90,10 +107,11 @@ struct ThumbnailsContentView: View {
 				//.padding(10.0)
 				.glassEffectWhenPossible()
 				.controlSize(.regular)
-				.fileImporter(isPresented: self.$isPresented, allowedContentTypes: [.folder], allowsMultipleSelection: false) { result in
+				.fileImporter(isPresented: self.$isPresented, allowedContentTypes: self.allowedContentTypes, allowsMultipleSelection: false) { result in
 					switch result {
 					case .success(let urls):
 						if let url: URL = urls.first {
+							self.url = url
 							self.folderUrl = url
 							
 							if let enumerator: FileManager.DirectoryEnumerator = FileManager.default.enumerator(at: url, includingPropertiesForKeys: nil) {
@@ -119,7 +137,7 @@ struct ThumbnailsContentView: View {
 					HStack {
 						Group {
 							if fileItem.thumbnail != nil {
-								Image(uiImage: fileItem.thumbnail)
+								fileItem.thumbnail
 									.resizable()
 									.scaledToFit()
 									.frame(width: 60.0, height: 60.0)
@@ -128,7 +146,7 @@ struct ThumbnailsContentView: View {
 									.frame(width: 60.0, height: 60.0)
 									.task {
 										do {
-											fileItem.thumbnail = try await self.thumbnailGenerator.thumbnail(url: fileItem.url, scale: self.displayScale) ?? UIImage(systemName: "xmark.circle")
+											fileItem.thumbnail = try await self.thumbnailGenerator.thumbnail(url: fileItem.url, scale: self.displayScale) ?? Image(systemName: "xmark.circle")
 											
 										} catch {
 											print(error.localizedDescription + " \(fileItem.url.lastPathComponent)")
